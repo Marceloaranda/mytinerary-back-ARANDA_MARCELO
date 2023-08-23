@@ -1,8 +1,18 @@
 const City = require('../models/City')
 
 const getCities = async (req, res)=> {
+
+    let fields = Object.keys(req.query)
+    let query = {}
+    for (const fiels of fields) {
+        query[field] = { $regex: req.query[field], $options: 'i'}
+    }
     try{
-        let cities = await City.find()
+        let data = await City.find(query)
+            const cities = {
+                count: data.length,
+                cities: data
+            }
         res.status(200).json(
             cities
             )
