@@ -3,10 +3,15 @@ const City = require('../models/City')
 const getCities = async (req, res)=> {
 
     let fields = Object.keys(req.query)
+    console.log(fields)
     let query = {}
-    for (const fiels of fields) {
-        query[field] = { $regex: req.query[field], $options: 'i'}
+
+    for (const field of fields) {
+        query[field] = { $regex: "^"+req.query[field], $options: 'i'}
+        console.log(query)
     }
+
+    console.log(query)
     try{
         let data = await City.find(query)
             const cities = {
@@ -14,7 +19,7 @@ const getCities = async (req, res)=> {
                 cities: data
             }
         res.status(200).json(
-            cities
+            data
             )
     }catch(err){
         res.status(500).json({message: err})
