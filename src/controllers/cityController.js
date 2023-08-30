@@ -22,7 +22,7 @@ const getCities = async (req, res)=> {
             data
             )
     }catch(err){
-        res.status(500).json({message: err})
+        res.status(500).json({message: err.message})
     }
 }
 
@@ -33,7 +33,7 @@ const getCity = async (req, res)=> {
         res.status(200).json(cityFinded)
 
     }catch(err){
-        res.startus(500).json({message: err})
+        res.startus(500).json({message: err.message})
     }
 }
 
@@ -47,7 +47,7 @@ const addCity = async (req, res) => {
         "city": cityCreated
         })
     }catch(err){
-        res.status(500).json({message: err})
+        res.status(500).json({message: err.message})
     }
 }
 
@@ -60,7 +60,7 @@ const deleteCity = async (req, res) => {
         "message": "city has been deleted",
         })
     }catch(err){
-        res.status(500).json({message: err})
+        res.status(500).json({message: err.message})
     }
 }
 
@@ -74,7 +74,7 @@ const updateCity = async (req, res) => {
         "message": "city has been updated",
         })
     }catch(err){
-        res.status(500).json({message: err})
+        res.status(500).json({message: err.message})
     }
 }
     
