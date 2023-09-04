@@ -6,9 +6,11 @@ const schemaItinerary = new Schema({
             type: String,
             required: true,
         },
-        author: {
-            name: {type: String, required: true}, 
-            profilePhoto: {type: String, required: true}
+        authorName: {
+            type: String, required: true,
+        }, 
+        profilePhoto: {
+            type: String, required: true,
         },
         price: {
             type: Number,
@@ -22,11 +24,15 @@ const schemaItinerary = new Schema({
             type: Number,
             required: true, min:0
         },
-        hashTags: [{
-            type: String,
+        hashTags: {
+            type: [String],
             required: true,
-        }],
-        _city: {type: Types.ObjectId, ref: "City"}
+        },
+        comments: {
+            type: [String],
+            required: true,
+        },
+        _city: {type: Types.ObjectId, ref: 'City'}
 
 
 

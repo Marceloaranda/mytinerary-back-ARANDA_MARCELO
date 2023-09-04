@@ -11,16 +11,13 @@ const getCities = async (req, res)=> {
         console.log(query)
     }
 
-    console.log(query)
+   // console.log(query)
     try{
-        let data = await City.find(query)
-            const cities = {
-                count: data.length,
-                cities: data
-            }
-        res.status(200).json(
-            data
-            )
+        let data = await City.find(query).populate({
+            path: '_itineraries',
+            select: 'title comments'
+        })
+        res.status(200).json(data)
     }catch(err){
         res.status(500).json({message: err.message})
     }

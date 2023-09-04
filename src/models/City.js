@@ -18,9 +18,9 @@ const schemaCity = new Schema({
             type: String,
             required: true
         },
-        itineraries:[{
+        _itineraries:[{
             type: Types.ObjectId,
-            ref: "Itinerary"
+            ref: 'Itinerary'
         }]
 })
 
