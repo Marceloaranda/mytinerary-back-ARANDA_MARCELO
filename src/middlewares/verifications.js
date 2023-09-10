@@ -1,3 +1,65 @@
+const Joi = require('joi');
+
+const userSchema = Joi.object({
+    email: Joi.string().email().min(6).max(20).required().messages({
+        'string.email': "Please enter a valid email",
+        'String.min': "Email must be al least 6 characters",
+        'String.max': "Email must be at most 20 characters",
+        'String.empty': "Please enter your email address",
+        'String.required': "Please enter your email address"
+
+    }),
+    password: Joi.string().alphanum().min(6).max(20).required(),
+    firstName: Joi.string().min(3).max(20).required(),
+    lastName: Joi.string().min(3).max(20).required(),
+    imageUrl: Joi.string().min(3).max(20).required(),
+    country: Joi.string().alphanum().min(3).max(20).required(),
+});
+
+const userSchemaSin = Joi.object({
+    email: Joi.string().email().min(6).max(20).required().messages({
+        'string.email': "Please enter a valid email",
+        'String.min': "Email must be al least 6 characters",
+        'String.max': "Email must be at most 20 characters",
+        'String.empty': "Please enter your email address",
+        'String.required': "Please enter your email address"
+
+    }),
+    password: Joi.string().alphanum().min(6).max(20).required(),
+    
+});
+
+
+
+const verifyAuthData = (req, res, next) => {
+
+    const payload = req.body;
+    const userValidated = userSchema.validate(payload);
+
+    if (userValidated.error){
+        return res.status(400).json({message: userValidated.error.details.map((err) => err.message)})
+    }
+    next()
+}
+
+
+const verifyAuthLogin = (req, res, next) => {
+
+    const payload = req.body
+    console.log(payload)
+    const userValidated = userSchemaSin.validate(payload);
+
+    if (userValidated.error){
+        return res.status(400).json({message: userValidated.error.details.map((err) => err.message)})
+    }
+    next()
+}
+
+
+
+
+
+
 const verifyDataCity = (req, res, next) => {
 
     let {city, country, image, description} = req.body
@@ -21,4 +83,9 @@ const verifyDataCity = (req, res, next) => {
     }
 
 
-module.exports =  { verifyDataCity }
+
+
+module.exports =  { verifyDataCity,
+                    verifyAuthData,
+                    verifyAuthLogin
+                }
