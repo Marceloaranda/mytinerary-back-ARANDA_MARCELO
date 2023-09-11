@@ -22,22 +22,31 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
     try {
-        const {password, email} = req.body
-        const userFounded = await User.findOne({email: email})
-console.log("User found", userFounded)
-        if (userFounded) {
-            if(verifyPassword(password, userFounded.password)){
-               return res.status(200).json({message: "successfully logged in", user: userFounded})
+        return res.status(200).json({
+            message: "successfully logged in", 
+            token: req.token, 
+            user: {
+                email: req.user.email,
+                _id: req.user._id
 
-            }else{
-               return  res.status(400).json({message: "wrong password"})
-            }
+            }})
 
-        }else{
-            res.status(400).json({message: "user not found"})
-        }
+    } catch (error) {
+        res.status(400).json({message: error.message});
+    }
+}
 
-        
+const authenticated = async (req, res) => {
+    try {
+        return res.status(200).json({
+            message: "successfully authenticated", 
+            token: req.token, 
+            user: {
+                email: req.user.email,
+                _id: req.user._id
+
+            }})
+
     } catch (error) {
         res.status(400).json({message: error.message});
     }
@@ -48,5 +57,6 @@ console.log("User found", userFounded)
 
 module.exports = {
     register,
-    login
+    login,
+    authenticated
 } 
