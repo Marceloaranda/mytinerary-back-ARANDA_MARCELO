@@ -12,8 +12,8 @@ const userSchema = Joi.object({
     password: Joi.string().alphanum().min(6).max(20).required(),
     firstName: Joi.string().min(3).max(20).required(),
     lastName: Joi.string().min(3).max(20).required(),
-    imageUrl: Joi.string().min(3).max(20).required(),
-    country: Joi.string().alphanum().min(3).max(20).required(),
+    imageUrl: Joi.string().min(3).required(),
+    country: Joi.string().alphanum().min(3).max(20)
 });
 
 const userSchemaSin = Joi.object({

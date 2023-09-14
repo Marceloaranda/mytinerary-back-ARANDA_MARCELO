@@ -5,7 +5,7 @@ const { hashPassword, verifyUserExists, verifyPassword, generateToken, passportV
 
 const authRouter = express.Router()
 
-authRouter.post('/register', verifyAuthData, hashPassword, register)
+authRouter.post('/register', verifyAuthData, hashPassword, generateToken, register)
 authRouter.post('/login', verifyAuthLogin, verifyUserExists, verifyPassword, generateToken, login)
 authRouter.post('/authenticated', passportVerificator.authenticate("jwt", {session: false}), generateToken, authenticated)
 

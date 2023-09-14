@@ -12,7 +12,12 @@ const register = async (req, res) => {
             }
             const userCreated = await User.create(payload)
             console.log("User created")
-            res.status(200).json({message: "User created successfully", userCreated})
+            res.status(200).json({
+                success: true,
+                message: "User created successfully", token: req.token, user: {
+                email: userCreated.email,
+                _id: userCreated._id
+            }})
 
         }catch(err) {
             res.status(400).json({message: err.message})
@@ -23,6 +28,7 @@ const register = async (req, res) => {
 const login = async (req, res) => {
     try {
         return res.status(200).json({
+            success: true,
             message: "successfully logged in", 
             token: req.token, 
             user: {
@@ -39,6 +45,7 @@ const login = async (req, res) => {
 const authenticated = async (req, res) => {
     try {
         return res.status(200).json({
+            success: true,
             message: "successfully authenticated", 
             token: req.token, 
             user: {

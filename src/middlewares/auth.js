@@ -74,7 +74,7 @@ const verifyUserExists = async (req, res, next) => {
 const generateToken = (req, res, next) => {
     try {
         let secretKey = "claveSecreta"
-        let token = jwt.sign({email: req.user.email}, secretKey,{expiresIn: 60*3})
+        let token = jwt.sign({email: req.body.email}, secretKey,{expiresIn: 60*3})
         req.token = token
         next()
         

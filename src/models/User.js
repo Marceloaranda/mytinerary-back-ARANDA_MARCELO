@@ -6,7 +6,7 @@ const schemaUser = new Schema ({
     email: {type:String, required: true},
     password: {type:String, required: true},
     imageUrl: {type:String, required: true},
-    country: {type:String, required: true}
+    country: {type:String }
 
 })
 
